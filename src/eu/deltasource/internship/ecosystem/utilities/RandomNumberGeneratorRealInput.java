@@ -18,4 +18,13 @@ public class RandomNumberGeneratorRealInput implements RandomNumberGenerator {
         int randomNum = rand.nextInt((max - min) + 1) + min;
         return (double) randomNum / 100;
     }
+
+    @Override
+    public int randomNumber(int min, int max) {
+        Random rand = new Random();
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+        return randomNum;
+    }
+
+
 }

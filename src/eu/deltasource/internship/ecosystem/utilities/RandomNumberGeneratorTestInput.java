@@ -11,4 +11,9 @@ public class RandomNumberGeneratorTestInput implements RandomNumberGenerator {
     public double randomPercentage(int min, int max) {
         return 0;
     }
+
+    @Override
+    public int randomNumber(int min, int max) {
+        return 0;
+    }
 }

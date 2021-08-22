@@ -1,19 +1,42 @@
 package eu.deltasource.internship.ecosystem.animals;
 
+import eu.deltasource.internship.ecosystem.utilities.RandomNumberGeneratorRealInput;
+
 public abstract class Carnivore extends Animal {
 
-    protected int hungerLevel = 0;
+    protected double hungerLevel = 0;
     protected int attackPoints;
 
-    public void attack(Herbivore herbivore){
+    public boolean attack(Herbivore herbivore){
+        double carnivoreAgeQueff = ((double) this.getAge() / this.getMaxAge());
+        double herbivoreAgeQueff = ((double) herbivore.getAge() / herbivore.getMaxAge());
+        RandomNumberGeneratorRealInput randomNum = new RandomNumberGeneratorRealInput();
 
+        if(carnivoreAgeQueff * this.attackPoints / (carnivoreAgeQueff * this.attackPoints  + herbivoreAgeQueff
+        * herbivore.escapePoints) <= randomNum.randomPercentageBetween0and100()){
+            herbivore.setAlive(false);
+            return true;
+        }
+        return false;
     }
 
-    public void setHungerLevel(int hungerLevel) {
+    public void setHungerLevel(double hungerLevel) {
+
+        if (hungerLevel > 100){
+            hungerLevel = 100;
+        }
+        if (hungerLevel < 0){
+            hungerLevel = 0;
+        }
+
         this.hungerLevel = hungerLevel;
     }
 
-    public int getHungerLevel() {
+    public double getHungerLevel() {
         return hungerLevel;
+    }
+
+    public void eat(Herbivore herbivore, int partsOfTheHerbivore ) {
+        this.setHungerLevel(this.hungerLevel - (herbivore.weight / partsOfTheHerbivore) / this.weight );
     }
 }
