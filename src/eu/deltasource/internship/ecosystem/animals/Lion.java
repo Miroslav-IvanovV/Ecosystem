@@ -4,9 +4,9 @@ import eu.deltasource.internship.ecosystem.enums.Biomes;
 import eu.deltasource.internship.ecosystem.enums.Habitat;
 import eu.deltasource.internship.ecosystem.enums.LivingTypes;
 
-public class Lion extends Carnivore{
+public class Lion extends Carnivore {
 
-    public Lion(){
+    public Lion() {
         this.age = 1;
         this.maxAge = 30;
         this.weight = 150;

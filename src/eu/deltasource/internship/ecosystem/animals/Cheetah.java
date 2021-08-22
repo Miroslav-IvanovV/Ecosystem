@@ -4,9 +4,9 @@ import eu.deltasource.internship.ecosystem.enums.Biomes;
 import eu.deltasource.internship.ecosystem.enums.Habitat;
 import eu.deltasource.internship.ecosystem.enums.LivingTypes;
 
-public class Cheetah extends  Carnivore{
+public class Cheetah extends Carnivore {
 
-    public Cheetah(){
+    public Cheetah() {
         this.age = 1;
         this.maxAge = 30;
         this.weight = 60;

@@ -4,9 +4,9 @@ import eu.deltasource.internship.ecosystem.enums.Biomes;
 import eu.deltasource.internship.ecosystem.enums.Habitat;
 import eu.deltasource.internship.ecosystem.enums.LivingTypes;
 
-public class Hare extends Herbivore{
+public class Hare extends Herbivore {
 
-    public Hare(){
+    public Hare() {
         this.age = 1;
         this.maxAge = 24;
         this.weight = 5;

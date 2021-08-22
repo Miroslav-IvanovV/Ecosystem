@@ -14,10 +14,10 @@ public class Ecosystem {
     public static List<Carnivore> carnivores = new ArrayList<>();
     public static List<Herbivore> herbivores = new ArrayList<>();
 
-    public static void init(List<Animal> animalCollection){
+    public static void init(List<Animal> animalCollection) {
 
-        for (int i = 0; i < animalCollection.size(); i++){
-            if (animalCollection.get(i) instanceof  Carnivore){
+        for (int i = 0; i < animalCollection.size(); i++) {
+            if (animalCollection.get(i) instanceof Carnivore) {
                 carnivores.add((Carnivore) animalCollection.get(i));
             } else {
                 herbivores.add((Herbivore) animalCollection.get(i));
@@ -25,21 +25,21 @@ public class Ecosystem {
         }
     }
 
-    public static void run(int iterations){
+    public static void run(int iterations) {
 
         attack();
         reproduce(iterations);
         age();
         ageCheck();
-        increasestarvation();
+        increaseStarvation();
         starvationCheck();
         cleanDeadAnimals();
         System.out.println(carnivores.size());
 
     }
 
-    private static void increasestarvation() {
-        for (int i = 0; i < carnivores.size(); i++){
+    private static void increaseStarvation() {
+        for (int i = 0; i < carnivores.size(); i++) {
             carnivores.get(i).setHungerLevel(carnivores.get(i).getHungerLevel() + 20);
         }
     }
@@ -48,7 +48,7 @@ public class Ecosystem {
         RandomNumberGeneratorRealInput randomNum = new RandomNumberGeneratorRealInput();
         boolean isAttackSuccessful = false;
         int numberOfAnimalsInTHeGroup;
-        for (int i = 0; i < carnivores.size(); i++){
+        for (int i = 0; i < carnivores.size(); i++) {
             if (herbivores.size() > 0) {
                 int chosenHerbivore = randomNum.randomNumber(0, herbivores.size() - 1);
                 isAttackSuccessful = carnivores.get(i).attack(herbivores.get(chosenHerbivore));
@@ -73,34 +73,34 @@ public class Ecosystem {
         }
     }
 
-    private static void starvationCheck(){
-        for (int i = 0; i < carnivores.size(); i++){
-            if (carnivores.get(i).getHungerLevel() >= 100){
+    private static void starvationCheck() {
+        for (int i = 0; i < carnivores.size(); i++) {
+            if (carnivores.get(i).getHungerLevel() >= 100) {
                 carnivores.get(i).setAlive(false);
             }
         }
     }
 
     private static void ageCheck() {
-        for (int i = 0; i < carnivores.size(); i++){
-            if (carnivores.get(i).getAge() == carnivores.get(i).getMaxAge()){
+        for (int i = 0; i < carnivores.size(); i++) {
+            if (carnivores.get(i).getAge() == carnivores.get(i).getMaxAge()) {
                 carnivores.get(i).setAlive(false);
             }
         }
 
-        for (int i = 0; i < herbivores.size(); i++){
-            if (herbivores.get(i).getAge() == herbivores.get(i).getMaxAge()){
+        for (int i = 0; i < herbivores.size(); i++) {
+            if (herbivores.get(i).getAge() == herbivores.get(i).getMaxAge()) {
                 herbivores.get(i).setAlive(false);
             }
         }
     }
 
     private static void reproduce(int iterations) {
-        for (int i = 0; i < carnivores.size(); i++){
-            if (iterations % carnivores.get(i).getReproductionRate() == 0){
+        for (int i = 0; i < carnivores.size(); i++) {
+            if (iterations % carnivores.get(i).getReproductionRate() == 0) {
                 i++;
-                while (i < carnivores.size()){
-                    if(iterations % carnivores.get(i).getReproductionRate() == 0) {
+                while (i < carnivores.size()) {
+                    if (iterations % carnivores.get(i).getReproductionRate() == 0) {
                         carnivores.add((Carnivore) carnivores.get(i).reproduce());
                         i++;
                         break;
@@ -110,11 +110,11 @@ public class Ecosystem {
             }
         }
 
-        for (int i = 0; i < herbivores.size(); i++){
-            if (iterations % herbivores.get(i).getReproductionRate() == 0){
+        for (int i = 0; i < herbivores.size(); i++) {
+            if (iterations % herbivores.get(i).getReproductionRate() == 0) {
                 i++;
-                while (i < herbivores.size()){
-                    if(iterations % herbivores.get(i).getReproductionRate() == 0){
+                while (i < herbivores.size()) {
+                    if (iterations % herbivores.get(i).getReproductionRate() == 0) {
                         herbivores.add((Herbivore) herbivores.get(i).reproduce());
                         i++;
                         break;
@@ -125,12 +125,12 @@ public class Ecosystem {
         }
     }
 
-    private static void age(){
-        for (int i = 0; i < carnivores.size(); i++){
+    private static void age() {
+        for (int i = 0; i < carnivores.size(); i++) {
             carnivores.get(i).setAge(carnivores.get(i).getAge() + 1);
         }
 
-        for (int i = 0; i < herbivores.size(); i++){
+        for (int i = 0; i < herbivores.size(); i++) {
             herbivores.get(i).setAge(herbivores.get(i).getAge() + 1);
         }
     }
@@ -138,13 +138,13 @@ public class Ecosystem {
     private static void cleanDeadAnimals() {
 
         for (int i = 0; i < carnivores.size(); i++) {
-            if (carnivores.get(i).isAlive()) {
+            if (!carnivores.get(i).isAlive()) {
                 carnivores.remove(i);
             }
         }
 
         for (int i = 0; i < herbivores.size(); i++) {
-            if (herbivores.get(i).isAlive()) {
+            if (!herbivores.get(i).isAlive()) {
                 herbivores.remove(i);
             }
         }

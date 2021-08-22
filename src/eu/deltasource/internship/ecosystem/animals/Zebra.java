@@ -4,9 +4,9 @@ import eu.deltasource.internship.ecosystem.enums.Biomes;
 import eu.deltasource.internship.ecosystem.enums.Habitat;
 import eu.deltasource.internship.ecosystem.enums.LivingTypes;
 
-public class Zebra  extends Herbivore {
+public class Zebra extends Herbivore {
 
-    public Zebra(){
+    public Zebra() {
         this.age = 1;
         this.maxAge = 40;
         this.weight = 300;

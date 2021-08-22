@@ -4,9 +4,9 @@ import eu.deltasource.internship.ecosystem.enums.Biomes;
 import eu.deltasource.internship.ecosystem.enums.Habitat;
 import eu.deltasource.internship.ecosystem.enums.LivingTypes;
 
-public class Buffalo extends Herbivore{
+public class Buffalo extends Herbivore {
 
-    public Buffalo(){
+    public Buffalo() {
         this.age = 1;
         this.maxAge = 35;
         this.weight = 800;

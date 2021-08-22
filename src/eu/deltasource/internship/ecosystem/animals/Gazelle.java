@@ -4,9 +4,9 @@ import eu.deltasource.internship.ecosystem.enums.Biomes;
 import eu.deltasource.internship.ecosystem.enums.Habitat;
 import eu.deltasource.internship.ecosystem.enums.LivingTypes;
 
-public class Gazelle extends Herbivore{
+public class Gazelle extends Herbivore {
 
-    public Gazelle(){
+    public Gazelle() {
         this.age = 1;
         this.maxAge = 25;
         this.weight = 25;

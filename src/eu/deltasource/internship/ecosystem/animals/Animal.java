@@ -18,18 +18,18 @@ public abstract class Animal {
     protected LivingTypes livingType;
     protected boolean alive = true;
 
-    public Animal reproduce(){
-        try{
+    public Animal reproduce() {
+        try {
             return this.getClass().newInstance();
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
         return null;
     }
 
-    public boolean checkInhabitedBiomes(String biome){
-        for(int i = 0; i < this.inhabitedBiomes.size(); i++){
-            if(biome.equalsIgnoreCase(String.valueOf(inhabitedBiomes.get(i)))){
+    public boolean checkInhabitedBiomes(String biome) {
+        for (int i = 0; i < this.inhabitedBiomes.size(); i++) {
+            if (biome.equalsIgnoreCase(String.valueOf(inhabitedBiomes.get(i)))) {
                 return true;
             }
         }
@@ -56,7 +56,7 @@ public abstract class Animal {
         return age;
     }
 
-    public void die(){
+    public void die() {
         this.alive = false;
     }
 

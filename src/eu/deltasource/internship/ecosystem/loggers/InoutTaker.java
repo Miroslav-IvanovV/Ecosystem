@@ -29,15 +29,15 @@ public class InoutTaker {
         Scanner scanner = new Scanner(System.in);
         List<Animal> listOfAnimals = new ArrayList<>();
 
-        for (int i = 0; i < allAnimals.size(); i++){
-            if (allAnimals.get(i).checkInhabitedBiomes(biome)){
+        for (int i = 0; i < allAnimals.size(); i++) {
+            if (allAnimals.get(i).checkInhabitedBiomes(biome)) {
                 String nameOfAnimal = allAnimals.get(i).getClass().getName().substring(44);
-                System.out.println("how many of " + nameOfAnimal +" you want to add");
+                System.out.println("how many of " + nameOfAnimal + " you want to add");
                 input = scanner.nextInt();
-                for (int j = 0; j < input; j++){
-                    try{
+                for (int j = 0; j < input; j++) {
+                    try {
                         listOfAnimals.add(allAnimals.get(i).getClass().newInstance());
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         System.out.println(e);
                     }
                 }
@@ -48,25 +48,25 @@ public class InoutTaker {
         Simulator.simulate(listOfAnimals, iterations);
     }
 
-    public static int inputIterations(){
+    public static int inputIterations() {
         System.out.println("How many years do you want to simulate.");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
-    public static String chooseBiome(){
+    public static String chooseBiome() {
         String chosenBiome;
         Scanner scanner = new Scanner(System.in);
         Biomes[] possibleValues = Biomes.values();
         System.out.println("in which biome do you wanna simulate your ecosystem");
         System.out.print("choose from : ");
-        for (int i = 0; i < possibleValues.length; i++){
+        for (int i = 0; i < possibleValues.length; i++) {
             System.out.print(possibleValues[i] + " ");
         }
         chosenBiome = scanner.nextLine();
-        while (true){
-            for (int i = 0; i < possibleValues.length; i++){
-                if (chosenBiome.equalsIgnoreCase(possibleValues[i].toString())){
+        while (true) {
+            for (int i = 0; i < possibleValues.length; i++) {
+                if (chosenBiome.equalsIgnoreCase(possibleValues[i].toString())) {
                     return chosenBiome;
                 }
             }

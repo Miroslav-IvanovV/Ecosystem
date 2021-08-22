@@ -4,9 +4,9 @@ import eu.deltasource.internship.ecosystem.enums.Biomes;
 import eu.deltasource.internship.ecosystem.enums.Habitat;
 import eu.deltasource.internship.ecosystem.enums.LivingTypes;
 
-public class Hyena extends Carnivore{
+public class Hyena extends Carnivore {
 
-    public Hyena(){
+    public Hyena() {
         this.age = 1;
         this.maxAge = 25;
         this.weight = 50;

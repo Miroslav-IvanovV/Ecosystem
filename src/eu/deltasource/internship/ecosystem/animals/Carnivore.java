@@ -7,13 +7,13 @@ public abstract class Carnivore extends Animal {
     protected double hungerLevel = 0;
     protected int attackPoints;
 
-    public boolean attack(Herbivore herbivore){
+    public boolean attack(Herbivore herbivore) {
         double carnivoreAgeQueff = ((double) this.getAge() / this.getMaxAge());
         double herbivoreAgeQueff = ((double) herbivore.getAge() / herbivore.getMaxAge());
         RandomNumberGeneratorRealInput randomNum = new RandomNumberGeneratorRealInput();
 
-        if(carnivoreAgeQueff * this.attackPoints / (carnivoreAgeQueff * this.attackPoints  + herbivoreAgeQueff
-        * herbivore.escapePoints) <= randomNum.randomPercentageBetween0and100()){
+        if (carnivoreAgeQueff * this.attackPoints / (carnivoreAgeQueff * this.attackPoints + herbivoreAgeQueff
+                * herbivore.escapePoints) <= randomNum.randomPercentageBetween0and100()) {
             herbivore.setAlive(false);
             return true;
         }
@@ -22,10 +22,10 @@ public abstract class Carnivore extends Animal {
 
     public void setHungerLevel(double hungerLevel) {
 
-        if (hungerLevel > 100){
+        if (hungerLevel > 100) {
             hungerLevel = 100;
         }
-        if (hungerLevel < 0){
+        if (hungerLevel < 0) {
             hungerLevel = 0;
         }
 
@@ -36,7 +36,7 @@ public abstract class Carnivore extends Animal {
         return hungerLevel;
     }
 
-    public void eat(Herbivore herbivore, int partsOfTheHerbivore ) {
-        this.setHungerLevel(this.hungerLevel - (herbivore.weight / partsOfTheHerbivore) / this.weight );
+    public void eat(Herbivore herbivore, int partsOfTheHerbivore) {
+        this.setHungerLevel(this.hungerLevel - (herbivore.weight / partsOfTheHerbivore) / this.weight);
     }
 }
