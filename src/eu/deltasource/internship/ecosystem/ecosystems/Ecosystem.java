@@ -27,14 +27,14 @@ public class Ecosystem {
 
     public static void run(int iterations) {
 
-        attack();
         reproduce(iterations);
+        attack();
         age();
         ageCheck();
         increaseStarvation();
         starvationCheck();
         cleanDeadAnimals();
-        System.out.println(carnivores.size());
+        System.out.println(herbivores.size());
 
     }
 
