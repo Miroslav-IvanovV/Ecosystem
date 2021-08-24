@@ -16,5 +16,6 @@ public class Cheetah extends Carnivore {
         this.hungerLevel = 15;
         this.attackPoints = 110;
         this.inhabitedBiomes.add(Biomes.SAVANNA);
+        this.hungerLevelModifier = 15;
     }
 }

@@ -18,6 +18,9 @@ public abstract class Animal {
     protected LivingTypes livingType;
     protected boolean alive = true;
 
+    /**
+     * @return a new animal from the same type.
+     */
     public Animal reproduce() {
         try {
             return this.getClass().newInstance();
@@ -27,6 +30,10 @@ public abstract class Animal {
         return null;
     }
 
+    /**
+     * @param biome takes the biome that you want to check if the animal inhabit.
+     * @return true if the animal inhabit the biome.
+     */
     public boolean checkInhabitedBiomes(String biome) {
         for (int i = 0; i < this.inhabitedBiomes.size(); i++) {
             if (biome.equalsIgnoreCase(String.valueOf(inhabitedBiomes.get(i)))) {

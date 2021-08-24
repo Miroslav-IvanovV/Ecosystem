@@ -16,5 +16,6 @@ public class Tiger extends Carnivore {
         this.hungerLevel = 18;
         this.attackPoints = 75;
         this.inhabitedBiomes.add(Biomes.SAVANNA);
+        this.hungerLevelModifier = 18;
     }
 }

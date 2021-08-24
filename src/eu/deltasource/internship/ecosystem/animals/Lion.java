@@ -16,5 +16,6 @@ public class Lion extends Carnivore {
         this.hungerLevel = 50;
         this.attackPoints = 80;
         this.inhabitedBiomes.add(Biomes.SAVANNA);
+        this.hungerLevelModifier = 20;
     }
 }

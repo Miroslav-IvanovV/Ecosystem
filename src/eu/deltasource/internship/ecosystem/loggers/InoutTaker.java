@@ -15,13 +15,13 @@ public class InoutTaker {
 
         List<Animal> allAnimals = new ArrayList<>();
 
+        allAnimals.add(new Tiger());
         allAnimals.add(new Buffalo());
         allAnimals.add(new Cheetah());
         allAnimals.add(new Gazelle());
         allAnimals.add(new Hare());
         allAnimals.add(new Hyena());
         allAnimals.add(new Lion());
-        allAnimals.add(new Tiger());
         allAnimals.add(new Zebra());
 
 

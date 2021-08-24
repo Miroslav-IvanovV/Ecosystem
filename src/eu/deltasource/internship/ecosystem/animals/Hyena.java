@@ -16,5 +16,7 @@ public class Hyena extends Carnivore {
         this.hungerLevel = 14;
         this.attackPoints = 80;
         this.inhabitedBiomes.add(Biomes.SAVANNA);
+        this.hungerLevelModifier = 14;
+
     }
 }
