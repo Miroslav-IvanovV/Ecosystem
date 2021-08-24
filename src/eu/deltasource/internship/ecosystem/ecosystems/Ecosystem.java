@@ -39,7 +39,6 @@ public class Ecosystem {
         System.out.println("Iteration : " + iterations);
         System.out.println("Herbivores : " + herbivores.size());
         System.out.println("Carnivore : " + carnivores.size() + "\n");
-        System.out.println(carnivores);
 
 
     }

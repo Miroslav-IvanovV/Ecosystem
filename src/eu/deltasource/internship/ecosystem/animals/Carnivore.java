@@ -64,7 +64,7 @@ public abstract class Carnivore extends Animal implements java.lang.Comparable<A
     }
 
     /**
-     * Helps with the sorting of the lists.
+     * Compare two objects.
      */
     @Override
     public int compareTo(Animal o) {
