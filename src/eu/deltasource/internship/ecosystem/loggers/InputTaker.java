@@ -1,42 +1,45 @@
 package eu.deltasource.internship.ecosystem.loggers;
 
-import eu.deltasource.internship.ecosystem.Simulator;
 import eu.deltasource.internship.ecosystem.animals.*;
-import eu.deltasource.internship.ecosystem.enums.Biomes;
+import eu.deltasource.internship.ecosystem.enums.Biome;
+import eu.deltasource.internship.ecosystem.utilities.RandomNumberGenerator;
+import eu.deltasource.internship.ecosystem.utilities.RandomNumberGeneratorRealInput;
 
 import java.util.Scanner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class InoutTaker {
+public class InputTaker {
 
-    public static void takingInput(String biome) {
+    public static final List<Animal> takingInput(String biome) {
 
         List<Animal> allAnimals = new ArrayList<>();
+        RandomNumberGeneratorRealInput randomNumber = new RandomNumberGeneratorRealInput();
 
-        allAnimals.add(new Tiger());
-        allAnimals.add(new Buffalo());
-        allAnimals.add(new Cheetah());
-        allAnimals.add(new Gazelle());
-        allAnimals.add(new Hare());
-        allAnimals.add(new Hyena());
-        allAnimals.add(new Lion());
-        allAnimals.add(new Zebra());
+        allAnimals.add(new Tiger(randomNumber));
+        allAnimals.add(new Buffalo(randomNumber));
+        allAnimals.add(new Cheetah(randomNumber));
+        allAnimals.add(new Gazelle(randomNumber));
+        allAnimals.add(new Hare(randomNumber));
+        allAnimals.add(new Hyena(randomNumber));
+        allAnimals.add(new Lion(randomNumber));
+        allAnimals.add(new Zebra(randomNumber));
 
 
-        int input, iterations = 0;
+        int input;
         Scanner scanner = new Scanner(System.in);
         List<Animal> listOfAnimals = new ArrayList<>();
 
         for (int i = 0; i < allAnimals.size(); i++) {
             if (allAnimals.get(i).checkInhabitedBiomes(biome)) {
-                String nameOfAnimal = allAnimals.get(i).getClass().getName().substring(44);
+                String nameOfAnimal = allAnimals.get(i).getClass().getSimpleName();
                 System.out.println("how many of " + nameOfAnimal + " you want to add");
                 input = scanner.nextInt();
                 for (int j = 0; j < input; j++) {
                     try {
-                        listOfAnimals.add(allAnimals.get(i).getClass().newInstance());
+                        listOfAnimals.add(allAnimals.get(i).getClass()
+                                .getDeclaredConstructor(RandomNumberGenerator.class).newInstance(randomNumber));
                     } catch (Exception e) {
                         System.out.println(e);
                     }
@@ -44,8 +47,7 @@ public class InoutTaker {
             }
         }
 
-        iterations = inputIterations();
-        Simulator.simulate(listOfAnimals, iterations);
+        return listOfAnimals;
     }
 
     public static int inputIterations() {
@@ -57,7 +59,7 @@ public class InoutTaker {
     public static String chooseBiome() {
         String chosenBiome;
         Scanner scanner = new Scanner(System.in);
-        Biomes[] possibleValues = Biomes.values();
+        Biome[] possibleValues = Biome.values();
         System.out.println("in which biome do you wanna simulate your ecosystem");
         System.out.print("choose from : ");
         for (int i = 0; i < possibleValues.length; i++) {

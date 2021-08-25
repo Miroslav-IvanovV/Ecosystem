@@ -1,5 +1,5 @@
 package eu.deltasource.internship.ecosystem.enums;
 
-public enum Biomes {
-    SAVANNA, TUNDRA, RAINFOREST
+public enum Gender {
+    MALE, FEMALE
 }

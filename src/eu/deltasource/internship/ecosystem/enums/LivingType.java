@@ -1,5 +1,5 @@
 package eu.deltasource.internship.ecosystem.enums;
 
-public enum LivingTypes {
+public enum LivingType {
     GROUP, ALONE
 }

@@ -1,36 +1,70 @@
 package eu.deltasource.internship.ecosystem.animals;
 
-import eu.deltasource.internship.ecosystem.enums.Biomes;
+import eu.deltasource.internship.ecosystem.enums.Biome;
+import eu.deltasource.internship.ecosystem.enums.Gender;
 import eu.deltasource.internship.ecosystem.enums.Habitat;
-import eu.deltasource.internship.ecosystem.enums.LivingTypes;
+import eu.deltasource.internship.ecosystem.enums.LivingType;
+import eu.deltasource.internship.ecosystem.utilities.RandomNumberGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Animal {
 
-    protected List<Biomes> inhabitedBiomes = new ArrayList<>();
+    protected Gender gender;
+    protected RandomNumberGenerator randomNumber;
+    protected List<Biome> inhabitedBiomes = new ArrayList<>();
     protected int age;
     protected int maxAge;
     protected double weight;
     protected Habitat mainHabitat;
     protected int reproductionRate;
-    protected LivingTypes livingType;
+    protected LivingType livingType;
     protected boolean alive = true;
 
+    public Animal(RandomNumberGenerator randomNumber){
+        this.randomNumber = randomNumber;
+
+        if (randomNumber.randomNumber(1,100) < 50){
+            gender = Gender.MALE;
+        } else {
+            gender = Gender.FEMALE;
+        }
+    }
+
+    public void ageing() {
+            this.setAge(this.getAge() + 1);
+        }
+
     /**
+     * Checks if the animals reached the maximum age and if its true it set his alive variable to false;
+     */
+    public void ageCheck() {
+
+        if (this.getAge() > this.getMaxAge()) {
+            this.die();
+        }
+
+    }
+
+    /**
+     * Checks if animal is ready to reproduce and if yes it returns a new animal from the same type.
      * @return a new animal from the same type.
      */
     public Animal reproduce() {
-        try {
-            return this.getClass().newInstance();
-        } catch (Exception e) {
-            System.out.println(e);
+
+        if (this.getAge() % this.getReproductionRate() == 0) {
+            try {
+                return this.getClass().getDeclaredConstructor(RandomNumberGenerator.class).newInstance(randomNumber);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
         return null;
     }
 
     /**
+     * Checks if the animal inhabit the biome.
      * @param biome takes the biome that you want to check if the animal inhabit.
      * @return true if the animal inhabit the biome.
      */
@@ -45,10 +79,6 @@ public abstract class Animal {
 
     public int getReproductionRate() {
         return reproductionRate;
-    }
-
-    public void setAlive(boolean alive) {
-        this.alive = alive;
     }
 
     public boolean isAlive() {
@@ -71,7 +101,7 @@ public abstract class Animal {
         return maxAge;
     }
 
-    public LivingTypes getLivingType() {
+    public LivingType getLivingType() {
         return livingType;
     }
 }

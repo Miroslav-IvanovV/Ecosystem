@@ -1,22 +1,20 @@
 package eu.deltasource.internship.ecosystem.animals;
 
 import eu.deltasource.internship.ecosystem.enums.Biome;
-import eu.deltasource.internship.ecosystem.enums.Gender;
 import eu.deltasource.internship.ecosystem.enums.Habitat;
 import eu.deltasource.internship.ecosystem.enums.LivingType;
 import eu.deltasource.internship.ecosystem.utilities.RandomNumberGenerator;
 
-public class Buffalo extends Herbivore {
+public class AnimalTestUnit extends  Animal{
 
-    public Buffalo(RandomNumberGenerator randomNumber) {
+    public AnimalTestUnit(RandomNumberGenerator randomNumber) {
         super(randomNumber);
         this.age = 1;
-        this.maxAge = 35;
+        this.maxAge = 5;
         this.weight = 800;
         this.mainHabitat = Habitat.LAND;
         this.livingType = LivingType.GROUP;
-        this.reproductionRate = 9;
-        this.escapePoints = 40;
+        this.reproductionRate = 1;
         this.inhabitedBiomes.add(Biome.SAVANNA);
     }
 }

@@ -3,12 +3,12 @@ package eu.deltasource.internship.ecosystem.utilities;
 public class RandomNumberGeneratorTestInput implements RandomNumberGenerator {
 
     @Override
-    public double randomPercentageBetween0and100() {
+    public double randomCoefficientBetween0and1() {
         return 0;
     }
 
     @Override
-    public double randomPercentage(int min, int max) {
+    public double randomCoefficient(int min, int max) {
         return 0;
     }
 
