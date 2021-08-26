@@ -3,25 +3,28 @@ package eu.deltasource.internship.ecosystem.ecosystems;
 import eu.deltasource.internship.ecosystem.animals.Animal;
 import eu.deltasource.internship.ecosystem.animals.Carnivore;
 import eu.deltasource.internship.ecosystem.animals.Herbivore;
+import eu.deltasource.internship.ecosystem.utilities.RandomNumberGenerator;
 import eu.deltasource.internship.ecosystem.utilities.RandomNumberGeneratorRealInput;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 
 public class Ecosystem {
 
     private List<Carnivore> carnivores = new ArrayList<>();
     private List<Herbivore> herbivores = new ArrayList<>();
     private HashMap<String, Integer> animalFemaleAndMaleMap = new HashMap<>();
+    private int deathCounter = 0, newBornCounter = 0;
 
-    public Ecosystem(List<Animal> list){
+    public Ecosystem(List<Animal> list) {
         init(list);
     }
 
+    /**
+     * split the animals to carnivores and herbivores.
+     * @param animalCollection gets the animals of the ecosystem.
+     */
     private void init(List<Animal> animalCollection) {
-
         for (int i = 0; i < animalCollection.size(); i++) {
             if (animalCollection.get(i) instanceof Carnivore) {
                 carnivores.add((Carnivore) animalCollection.get(i));
@@ -31,8 +34,15 @@ public class Ecosystem {
         }
     }
 
+    /**
+     * simulate a year in the ecosystem.
+     * @param iterations gets the iteration that we are in right now.
+     */
     public void run(int iterations) {
+        deathCounter = 0;
+        newBornCounter = 0;
 
+        reproduceCheck();
         reproduce();
         attack();
         ageing();
@@ -43,9 +53,24 @@ public class Ecosystem {
         sortLists();
         System.out.println("Iteration : " + iterations);
         System.out.println("Herbivores : " + herbivores.size());
-        System.out.println("Carnivore : " + carnivores.size() + "\n");
+        System.out.println("Carnivore : " + carnivores.size());
+        System.out.println("Newborns : " + newBornCounter);
+        System.out.println("Death : " + deathCounter + "\n");
 
 
+    }
+
+
+    /**
+     * Checks if the animal is ready to reproduce
+     */
+    private void reproduceCheck() {
+        for (int i = 0; i < carnivores.size(); i++) {
+            carnivores.get(i).isReadyToReproduceCheck();
+        }
+        for (int i = 0; i < herbivores.size(); i++) {
+            herbivores.get(i).isReadyToReproduceCheck();
+        }
     }
 
     /**
@@ -73,7 +98,11 @@ public class Ecosystem {
         for (int i = 0; i < carnivores.size(); i++) {
             if (herbivores.size() > 0) {
                 int chosenHerbivore = randomNum.randomNumber(0, herbivores.size() - 1);
-                carnivores.get(i).attack(herbivores.get(chosenHerbivore) ,carnivores);
+                carnivores.get(i).attack(herbivores.get(chosenHerbivore), carnivores);
+                if (!herbivores.get(chosenHerbivore).isAlive()){
+                    herbivores.remove(chosenHerbivore);
+                    deathCounter++;
+                }
             }
         }
     }
@@ -104,20 +133,65 @@ public class Ecosystem {
      * Calls the method reproduce on all animals.
      */
     private void reproduce() {
-        Animal newAnimal;
+        int iterationsToReproduce = 0;
+        RandomNumberGenerator randomNumber = new RandomNumberGeneratorRealInput();
+        Animal newAnimal = null;
+        Class<Animal> c = null;
+
         for (int i = 0; i < carnivores.size(); i++) {
-            newAnimal = (Carnivore) carnivores.get(i).reproduce();
-            if (newAnimal != null) {
-                carnivores.add((Carnivore) newAnimal);
+            if (carnivores.get(i).isReadyToReproduceCheck()) {
+                    animalFemaleAndMaleMap.put(carnivores.get(i).getGender() + carnivores.get(i).getClass()
+                            .getName(), animalFemaleAndMaleMap.getOrDefault(carnivores.get(i).getGender()
+                            + carnivores.get(i).getClass().getName(), 0) + 1);
+
             }
         }
 
         for (int i = 0; i < herbivores.size(); i++) {
-            newAnimal = (Herbivore) herbivores.get(i).reproduce();
-            if (newAnimal != null) {
-                herbivores.add((Herbivore) newAnimal);
+            if (herbivores.get(i).isReadyToReproduceCheck()) {
+                animalFemaleAndMaleMap.put(herbivores.get(i).getGender() + herbivores.get(i).getClass()
+                        .getName(), animalFemaleAndMaleMap.getOrDefault( herbivores.get(i).getGender()
+                        + herbivores.get(i).getClass().getName(), 0) + 1);
+
             }
         }
+
+        for (Map.Entry<String, Integer> entry : animalFemaleAndMaleMap.entrySet()){
+            if(entry.getKey().charAt(0) == 'M'){
+                iterationsToReproduce = Math.min(animalFemaleAndMaleMap.get(entry.getKey()) == null ? 0
+                        : animalFemaleAndMaleMap.get(entry.getKey()), animalFemaleAndMaleMap.get("FEMALE"
+                        + entry.getKey().substring(4)) == null ? 0 : animalFemaleAndMaleMap.get("FEMALE"
+                        + entry.getKey().substring(4)));
+                newBornCounter += iterationsToReproduce;
+
+                try {
+                    c = (Class<Animal>) Class.forName(entry.getKey().substring(4));
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            for (int i = 0; i < iterationsToReproduce; i++){
+                try {
+                    newAnimal = c.getDeclaredConstructor(RandomNumberGenerator.class).newInstance(randomNumber);
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
+
+                if (newAnimal instanceof Carnivore){
+                    carnivores.add((Carnivore) newAnimal);
+                } else {
+                    herbivores.add((Herbivore) newAnimal);
+                }
+            }
+        }
+        animalFemaleAndMaleMap.clear();
     }
 
     /**
@@ -141,12 +215,14 @@ public class Ecosystem {
         for (int i = 0; i < carnivores.size(); i++) {
             if (!carnivores.get(i).isAlive()) {
                 carnivores.remove(i);
+                deathCounter++;
             }
         }
 
         for (int i = 0; i < herbivores.size(); i++) {
             if (!herbivores.get(i).isAlive()) {
                 herbivores.remove(i);
+                deathCounter++;
             }
         }
     }

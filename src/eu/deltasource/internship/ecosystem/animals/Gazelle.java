@@ -17,5 +17,6 @@ public class Gazelle extends Herbivore {
         this.reproductionRate = 5;
         this.escapePoints = 80;
         this.inhabitedBiomes.add(Biome.SAVANNA);
+        this.inhabitedBiomes.add(Biome.GRASSLAND);
     }
 }

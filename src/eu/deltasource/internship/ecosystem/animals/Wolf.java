@@ -5,17 +5,20 @@ import eu.deltasource.internship.ecosystem.enums.Habitat;
 import eu.deltasource.internship.ecosystem.enums.LivingType;
 import eu.deltasource.internship.ecosystem.utilities.RandomNumberGenerator;
 
-public class Buffalo extends Herbivore {
+public class Wolf extends Carnivore {
 
-    public Buffalo(RandomNumberGenerator randomNumber) {
+    public Wolf(RandomNumberGenerator randomNumber){
         super(randomNumber);
         this.age = 1;
-        this.maxAge = 35;
-        this.weight = 800;
+        this.maxAge = 24;
+        this.weight = 60;
         this.mainHabitat = Habitat.LAND;
         this.livingType = LivingType.GROUP;
-        this.reproductionRate = 9;
-        this.escapePoints = 40;
-        this.inhabitedBiomes.add(Biome.SAVANNA);
+        this.reproductionRate = 8;
+        this.hungerLevel = 25;
+        this.attackPoints = 45;
+        this.hungerLevelModifier = 17;
+        this.inhabitedBiomes.add(Biome.GRASSLAND);
+
     }
 }

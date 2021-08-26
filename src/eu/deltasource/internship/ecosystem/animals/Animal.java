@@ -53,7 +53,7 @@ public abstract class Animal {
      */
     public Animal reproduce() {
 
-        if (this.getAge() % this.getReproductionRate() == 0) {
+        if (this.isReadyToReproduceCheck()) {
             try {
                 return this.getClass().getDeclaredConstructor(RandomNumberGenerator.class).newInstance(randomNumber);
             } catch (Exception e) {
@@ -61,6 +61,10 @@ public abstract class Animal {
             }
         }
         return null;
+    }
+
+    public boolean isReadyToReproduceCheck() {
+        return this.getAge() % this.getReproductionRate() == 0;
     }
 
     /**
@@ -103,5 +107,9 @@ public abstract class Animal {
 
     public LivingType getLivingType() {
         return livingType;
+    }
+
+    public Gender getGender() {
+        return gender;
     }
 }

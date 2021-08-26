@@ -25,6 +25,10 @@ public class InputTaker {
         allAnimals.add(new Hyena(randomNumber));
         allAnimals.add(new Lion(randomNumber));
         allAnimals.add(new Zebra(randomNumber));
+        allAnimals.add(new Antelope(randomNumber));
+        allAnimals.add(new Coyote(randomNumber));
+        allAnimals.add(new Deer(randomNumber));
+        allAnimals.add(new Wolf(randomNumber));
 
 
         int input;
